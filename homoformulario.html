@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homologación UNIAUTÓNOMA DEL CAUCA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border: 3px solid rgba(0, 117, 191, 0.3);
+        }
+        .btn-primary {
+            background-color: #0075BF;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #19407B;
+        }
+        /* 🔹 Estilos para el botón de inicio */
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🔹 Botón de inicio en la parte superior derecha -->
+    <a href="index.html" class="btn btn-primary home-button">Inicio</a>
+
+    <div class="container">
+        <h3 class="text-center text-primary">Formulario de Homologación</h3>
+        <form id="homologacionForm">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellido" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="programa" class="form-label">Programa</label>
+                <select class="form-select" id="programa" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Ingeniería de Software">Ingeniería de Software</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="documento" class="form-label">Tipo de Documento</label>
+                <select class="form-select" id="documento" required>
+                    <option value="">Seleccione...</option>
+                    <option value="TI">TI</option>
+                    <option value="CC">CC</option>
+                    <option value="Cédula Extranjera">Cédula Extranjera</option>
+                </select>
+            </div>
+            <div class="mb-3 text-center">
+                <div class="g-recaptcha" data-sitekey="6Lcqj-cqAAAAAEwiItxDZJqnze8re8ej45zYdM_z"></div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar Información</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("homologacionForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const email = document.getElementById("email").value;
+
+            try {
+                const response = await fetch("http://localhost:3001/send-email", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nombre, apellido, email })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    Swal.fire({
+                        title: "¡Éxito!",
+                        text: `La credencial ha sido enviada a ${email}.`,
+                        icon: "success",
+                        confirmButtonColor: "#0075BF"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: data.error,
+                        icon: "error",
+                        confirmButtonColor: "#d33"
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo conectar con el servidor.",
+                    icon: "error",
+                    confirmButtonColor: "#d33"
+                });
+            }
+        });
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Homologación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <style>
+        :root {
+            --primary-color: #19407B;
+            --secondary-color: #f8f9fa;
+            --accent-color: #17a2b8;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand, .nav-link, .nav-icon {
+            color: white !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        
+        .nav-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .nav-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .container {
+            margin-top: 20px;
+        }
+        
+        .carousel {
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-inner img {
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .info-section {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 900px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .info-section h2 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .offcanvas {
+            background-color: white;
+            padding: 20px;
+            width: 300px;
+        }
+        
+        .offcanvas-header {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .offcanvas-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .menu-buttons button {
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .menu-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .menu-buttons .btn-primary { 
+            background-color: var(--primary-color); 
+        }
+        
+        .menu-buttons .btn-info { 
+            background-color: var(--accent-color); 
+        }
+        
+        .menu-buttons .btn-danger { 
+            background-color: var(--danger-color); 
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+        
+        .toast {
+            opacity: 0;
+            transition: opacity 0.3s;
+            animation: slideIn 0.5s forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .step-progress {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        
+        .step {
+            text-align: center;
+            flex-grow: 1;
+            padding: 15px;
+            margin: 0 5px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-3px);
+        }
+        
+        .step:not(:last-child):after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            width: 20px;
+            height: 2px;
+            background-color: #ccc;
+        }
+        
+        .step.pending { 
+            background-color: #f0f0f0;
+            color: #777; 
+        }
+        
+        .step.review { 
+            background-color: var(--warning-color);
+            color: white; 
+        }
+        
+        .step.accepted { 
+            background-color: var(--success-color); 
+            color: white;
+        }
+        
+        .step.rejected { 
+            background-color: var(--danger-color); 
+            color: white; 
+        }
+        
+        .profile-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .profile-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .profile-info .row {
+            margin-bottom: 10px;
+        }
+        
+        .profile-info .label {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .profile-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 0;
+        }
+        
+        .modal-content {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .modal-title {
+            font-weight: 600;
+        }
+        
+        .btn-close {
+            background-color: white;
+        }
+        
+        .custom-badge {
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        /* Estilos para el icono de usuario */
+        .user-icon {
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .user-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Estilos para el modal de perfil */
+        .user-credentials {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .credential-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .credential-value {
+            font-family: monospace;
+            background-color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-building-check me-2"></i>
+                Homologaciones Uniautónoma
+            </a>
+            <div class="d-flex">
+                <button class="btn" onclick="showNotification()" title="Notificaciones">
+                    <i class="bi bi-bell-fill nav-icon"></i>
+                </button>
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#userProfileModal" title="Perfil de Usuario">
+                    <i class="bi bi-person-circle nav-icon user-icon"></i>
+                </button>
+                <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" title="Menú">
+                    <i class="bi bi-list nav-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- User Profile Modal -->
+    <div class="modal fade" id="userProfileModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-circle me-2"></i>
+                        Perfil de Usuario
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-person-circle fs-1 me-3 text-primary"></i>
+                        <div>
+                            <h5 class="mb-0">Carlos Andrés Pérez Rodríguez</h5>
+                            <p class="text-muted mb-0">Postulante</p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-credentials">
+                        <h6 class="mb-3">Credenciales de Acceso</h6>
+                        <div class="credential-item">
+                            <span><i class="bi bi-envelope-fill me-2"></i>Correo:</span>
+                            <span class="credential-value">caperez@uniautonoma.edu.co</span>
+                        </div>
+                        <div class="credential-item">
+                            <span><i class="bi bi-key-fill me-2"></i>Contraseña:</span>
+                            <span class="credential-value">87654321</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Menu (Ahora a la derecha) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">
+                <i class="bi bi-grid-1x2-fill me-2"></i>
+                Menú Principal
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body menu-buttons">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#homologacionModal">
+                <i class="bi bi-clipboard-check me-2"></i>
+                Proceso de Homologación
+            </button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
+                <i class="bi bi-person-vcard me-2"></i>
+                Información General
+            </button>
+            <button class="btn btn-danger" onclick="logout()">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Cerrar Sesión
+            </button>
+        </div>
+    </div>
+    
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- Carousel -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.uniautonoma.edu.co/sites/default/files/noticia/dsc_9329.jpg" class="d-block w-100" alt="Campus Universitario">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Campus Universitario</h5>
+                    <p>Instalaciones adecuadas para tu formación académica</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.proclamadelpacifico.com/wp-content/uploads/2021/12/Abren-novedosas-carreras-de-ingenieria-en-la-Uniautonoma-del-Cauca-6.jpg" class="d-block w-100" alt="Carreras de Ingeniería">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Carreras de Ingeniería</h5>
+                    <p>Formación en tecnologías </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.uniautonoma.edu.co/sites/default/files/styles/ancho_contenido/public/noticia/2a.jpg?itok=HGyd5HPf" class="d-block w-100" alt="Vida Universitaria">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Vida Universitaria</h5>
+                    <p>Experiencias enriquecedoras para tu crecimiento personal</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <!-- Info Section -->
+    <div class="info-section">
+        <h2>Corporación Universitaria Autónoma del Cauca</h2>
+        <p class="lead">Es una Institución de Educación Superior, sin ánimo de lucro, fundada para responder a las necesidades educativas de la región y del país.</p>
+        <p>Forma profesionales altamente competitivos por su proyección científica, sensibilidad social y liderazgo cívico y empresarial.</p>
+        <div class="mt-4">
+            <span class="badge bg-primary custom-badge me-2">Calidad Educativa</span>
+            <span class="badge bg-success custom-badge me-2">Excelencia Académica</span>
+            <span class="badge bg-info custom-badge">Proyección Social</span>
+        </div>
+    </div>
+    
+    <!-- Homologation Process Modal -->
+    <div class="modal fade" id="homologacionModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-clipboard-check me-2"></i>
+                        Estado de la Postulación
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="step-progress">
+                        <div class="step pending">
+                            <i class="bi bi-hourglass me-1"></i>
+                            En Espera
+                        </div>
+                        <div class="step review">
+                            <i class="bi bi-search me-1"></i>
+                            En Revisión
+                        </div>
+                        <div class="step accepted">
+                            <i class="bi bi-check-circle-fill me-1"></i>
+                            Aceptada
+                        </div>
+                        <div class="step rejected">
+                            <i class="bi bi-x-circle me-1"></i>
+                            Rechazada
+                        </div>
+                    </div>
+                    <div class="alert alert-success mt-4">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        Su postulación ha sido aceptada exitosamente. Pronto recibirá información adicional sobre los próximos pasos.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Information Modal -->
+    <div class="modal fade" id="infoModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-vcard me-2"></i>
+                        Información del Postulante
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="label">Nombres y Apellidos:</div>
+                                    <div class="value">Carlos Andrés Pérez Rodríguez</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="label">Cédula:</div>
+                                    <div class="value">1087654321</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="label">Carrera:</div>
+                                    <div class="value">Ingeniería de Software</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <div class="label">Semestres Cursados:</div>
+                                    <div class="value">4</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="label">Municipio/Ciudad:</div>
+                                    <div class="value">Popayán</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="label">Universidad de Procedencia:</div>
+                                    <div class="value">Universidad del Cauca</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5>Asignaturas para Homologación</h5>
+                            <table class="table table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Asignatura Cursada</th>
+                                        <th>Créditos</th>
+                                        <th>Nota</th>
+                                        <th>Asignatura a Homologar</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Programación Orientada a Objetos</td>
+                                        <td>4</td>
+                                        <td>4.2</td>
+                                        <td>POO</td>
+                                        <td><span class="badge bg-success">Aprobada</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cálculo Diferencial</td>
+                                        <td>3</td>
+                                        <td>3.8</td>
+                                        <td>Cálculo I</td>
+                                        <td><span class="badge bg-success">Aprobada</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estructuras de Datos</td>
+                                        <td>4</td>
+                                        <td>4.0</td>
+                                        <td>Estructuras de Datos</td>
+                                        <td><span class="badge bg-success">Aprobada</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Función para mostrar notificación
+        function showNotification() {
+            let toast = document.createElement("div");
+            toast.classList.add("toast", "show", "bg-success", "text-white", "p-3", "rounded");
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong><i class="bi bi-check-circle-fill me-2"></i>¡Felicidades!</strong> Tu postulación fue aceptada.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.getElementById("toastContainer").appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+        }
+        
+        // Función para cerrar sesión
+        function logout() {
+            if(confirm("¿Está seguro que desea cerrar la sesión?")) {
+                window.location.href = "index.html";
+            }
+        }
+        
+        // Al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar todos los tooltips (información emergente)
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>
