@@ -5,35 +5,24 @@
 let currentStep = 1; // Asegurar que currentStep esté definido globalmente
 
 function changeStep(stepChange) {
-    let steps = document.querySelectorAll(".step-content");
-    let indicators = document.querySelectorAll(".step");
+    const steps = document.querySelectorAll(".step");
+    const stepContents = document.querySelectorAll(".step-content");
 
-    // Calcular el nuevo paso asegurando que no salga de los límites
     let newStep = currentStep + stepChange;
-    
-    if (newStep < 1) {
-        newStep = 1; // No permitir ir a un paso menor que 1
-    } 
-    if (newStep > steps.length) {
-        newStep = steps.length; // No permitir ir más allá del último paso
-    }
 
-    // Si el paso no ha cambiado, no hacer nada
-    if (newStep === currentStep) return;
+    // Evitar que se salga de los límites
+    if (newStep < 1 || newStep > steps.length) return;
 
     // Ocultar el paso actual
+    stepContents[currentStep - 1].classList.remove("active");
     steps[currentStep - 1].classList.remove("active");
-    indicators[currentStep - 1].classList.remove("active");
 
     // Actualizar el paso actual
     currentStep = newStep;
 
     // Mostrar el nuevo paso
+    stepContents[currentStep - 1].classList.add("active");
     steps[currentStep - 1].classList.add("active");
-    indicators[currentStep - 1].classList.add("active");
-
-    // Asegurar que el contenedor del paso esté visible
-    steps[currentStep - 1].scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 
@@ -68,14 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
         progressBar.style.width = `${stepPercentage}%`;
     }
 
-    // Agregar eventos de clic a los pasos
-    steps.forEach(step => {
-        step.addEventListener("click", function () {
-            const stepNumber = parseInt(this.dataset.step);
-            updateStep(stepNumber);
-        });
-    });
-
     // Iniciar en el primer paso
     updateStep(1);
 });
@@ -105,11 +86,8 @@ function validarFormularioStep1() {
     const primerApellido = document.getElementById("primer_apellido");
     const segundoApellido = document.getElementById("segundo_apellido");
     const email = document.getElementById("email");
-    const confirmEmail = document.getElementById("confirm_email");
     const telefono = document.getElementById("telefono");
     const direccion = document.getElementById("direccion");
-    const departamento = document.getElementById("departamento");
-    const municipio = document.getElementById("municipio");
 
     // Expresiones regulares
     const regexTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; // Solo letras y espacios
@@ -122,11 +100,11 @@ function validarFormularioStep1() {
         const errorMensaje = campo.nextElementSibling;
         if (!campo.value.trim()) {
             campo.classList.add("error");
-            errorMensaje.textContent = mensaje;
+            if (errorMensaje) errorMensaje.textContent = mensaje;
             valido = false;
         } else {
             campo.classList.remove("error");
-            errorMensaje.textContent = "";
+            if (errorMensaje) errorMensaje.textContent = "";
         }
     }
 
@@ -136,54 +114,51 @@ function validarFormularioStep1() {
     validarCampo(primerNombre, "Ingrese su primer nombre");
     validarCampo(primerApellido, "Ingrese su primer apellido");
     validarCampo(email, "Ingrese un correo electrónico");
-    validarCampo(confirmEmail, "Confirme su correo electrónico");
     validarCampo(telefono, "Ingrese su teléfono");
     validarCampo(direccion, "Ingrese su dirección");
-    validarCampo(departamento, "Seleccione un departamento");
-    validarCampo(municipio, "Seleccione un municipio");
+    
 
     // Validar que los nombres y apellidos solo contengan letras
     [primerNombre, segundoNombre, primerApellido, segundoApellido].forEach(campo => {
+        const errorMensaje = campo.nextElementSibling;
         if (campo.value.trim() && !regexTexto.test(campo.value)) {
             campo.classList.add("error");
-            campo.nextElementSibling.textContent = "Solo se permiten letras";
+            if (errorMensaje) errorMensaje.textContent = "Solo se permiten letras";
             valido = false;
         }
     });
 
     // Validar número de identificación (solo números)
+    const errorNumeroIdentificacion = numeroIdentificacion.nextElementSibling;
     if (!regexNumeroIdentificacion.test(numeroIdentificacion.value)) {
         numeroIdentificacion.classList.add("error");
-        numeroIdentificacion.nextElementSibling.textContent = "Ingrese solo números";
+        if (errorNumeroIdentificacion) errorNumeroIdentificacion.textContent = "Ingrese solo números";
         valido = false;
     }
 
     // Validar email y confirmar que coincidan
+    const errorEmail = email.nextElementSibling;
     if (!regexEmail.test(email.value)) {
         email.classList.add("error");
-        email.nextElementSibling.textContent = "Ingrese un correo válido";
+        if (errorEmail) errorEmail.textContent = "Ingrese un correo válido";
         valido = false;
     }
 
-    if (email.value !== confirmEmail.value) {
-        confirmEmail.classList.add("error");
-        confirmEmail.nextElementSibling.textContent = "Los correos no coinciden";
-        valido = false;
-    }
 
     // Validar teléfono (solo números y de 7 a 10 dígitos)
+    const errorTelefono = telefono.nextElementSibling;
     if (!regexTelefono.test(telefono.value)) {
         telefono.classList.add("error");
-        telefono.nextElementSibling.textContent = "Ingrese un número de teléfono válido (7 a 10 dígitos)";
+        if (errorTelefono) errorTelefono.textContent = "Ingrese un número de teléfono válido (7 a 10 dígitos)";
         valido = false;
     }
 
-    // Si todo es válido, mostrar mensaje de éxito
+    // Si todo es válido, mostrar mensaje y avanzar al siguiente paso
     if (valido) {
-        alert("Formulario enviado correctamente"); changeStep(1);
+        alert("Formulario enviado correctamente");
+        changeStep(1);
     }
 }
-
 // Datos de departamentos y municipios de Colombia
 const departamentosMunicipios = {
     "Antioquia": ["Medellín", "Bello", "Itagüí", "Envigado"],
@@ -287,6 +262,7 @@ function toggleFechaFinalizacion() {
     document.getElementById("fecha_finalizacion_container").style.display = finalizoEstudios === "si" ? "block" : "none";
     document.getElementById("fecha_ultimo_semestre_container").style.display = finalizoEstudios === "no" ? "block" : "none";
 }
+
 function validarFormularioStep2() {
     let valido = true;
 
@@ -298,48 +274,59 @@ function validarFormularioStep2() {
     const fechaFinalizacion = document.getElementById("fecha_finalizacion");
     const fechaUltimoSemestre = document.getElementById("fecha_ultimo_semestre");
 
-    // Función para obtener el mensaje de error asociado al campo
-    function obtenerMensajeError(campo) {
-        let errorMensaje = campo.closest(".form-group")?.querySelector(".error-message");
-        if (!errorMensaje) {
-            errorMensaje = document.createElement("span");
-            errorMensaje.classList.add("error-message");
-            campo.parentNode.appendChild(errorMensaje);
-        }
-        return errorMensaje;
-    }
+    // Expresión regular para validar fechas en formato YYYY-MM-DD
+    const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
 
     // Función para validar campo obligatorio
     function validarCampo(campo, mensaje) {
-        const errorMensaje = obtenerMensajeError(campo);
+        const errorMensaje = campo.nextElementSibling;
         if (!campo.value.trim()) {
             campo.classList.add("error");
-            errorMensaje.textContent = mensaje;
+            if (errorMensaje) errorMensaje.textContent = mensaje;
             valido = false;
         } else {
             campo.classList.remove("error");
-            errorMensaje.textContent = "";
+            if (errorMensaje) errorMensaje.textContent = "";
         }
     }
 
-    // Validar campos obligatorios
+    // Validar los campos obligatorios
     validarCampo(institucion, "Seleccione su institución de origen");
     validarCampo(tipoFormacion, "Seleccione su tipo de formación");
     validarCampo(carrera, "Seleccione su carrera o programa");
     validarCampo(finalizoEstudios, "Seleccione si finalizó sus estudios");
 
-    // Validar fechas según si finalizó estudios o no
+    // Validar fechas según la selección de finalización de estudios
     if (finalizoEstudios.value === "si") {
         validarCampo(fechaFinalizacion, "Ingrese la fecha de finalización de sus estudios");
+        if (!regexFecha.test(fechaFinalizacion.value)) {
+            fechaFinalizacion.classList.add("error");
+            fechaFinalizacion.nextElementSibling.textContent = "Ingrese una fecha válida (YYYY-MM-DD)";
+            valido = false;
+            alert("Ingrese una fecha válida (YYYY-MM-DD)");
+
+        }
+        fechaUltimoSemestre.classList.remove("error");
+        fechaUltimoSemestre.nextElementSibling.textContent = "";
     } else if (finalizoEstudios.value === "no") {
         validarCampo(fechaUltimoSemestre, "Ingrese la fecha del último semestre cursado");
+        if (!regexFecha.test(fechaUltimoSemestre.value)) {
+            fechaUltimoSemestre.classList.add("error");
+            fechaUltimoSemestre.nextElementSibling.textContent = "Ingrese una fecha válida (YYYY-MM-DD)";
+            valido = false;
+        }
+        fechaFinalizacion.classList.remove("error");
+        fechaFinalizacion.nextElementSibling.textContent = "";
     }
 
     // Si la validación es correcta, avanzar al siguiente paso
     if (valido) {
+        alert("Formulario enviado correctamente");
+
         changeStep(1);
     }
 }
+
 
 
 
@@ -431,7 +418,8 @@ const pensum = {
         "Semestre 5": ["Automatización de Redes", "Gestión de Servicios en la Nube", "Administración de Data Centers", "Trabajo de Grado"]
     }
 
-}; function updateSemestres() {
+};
+function updateSemestres() {
     const carrera = document.getElementById("carrera").value;
     const semestreSelect = document.getElementById("semestre");
     semestreSelect.innerHTML = `<option value="">Seleccione un semestre</option>`;
@@ -728,32 +716,45 @@ function enviarFormulario() {
     let año = fecha.getFullYear();
     let numeroRadicado = `HOM-${año}-0001`; // Aquí puedes hacer que el número consecutivo aumente dinámicamente
 
-    // Crear el contenido del modal de confirmación
-    let mensaje = `
-        <h3>Solicitud Enviada con Éxito</h3>
-        <p><strong>Número de Radicado:</strong> ${numeroRadicado}</p>
-        <p>Se ha enviado la información a su correo.</p>
-        <button onclick="redirigirAspirante()">Aceptar</button>
-    `;
-
     // Crear el modal
     let modal = document.createElement("div");
     modal.id = "modalConfirmacionEnvio";
-    modal.classList.add("modal");
+    modal.classList.add("modal", "active"); // Añadimos la clase active para las animaciones
 
+    // Crear el contenido del modal
     let modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
-    modalContent.innerHTML = mensaje;
+
+    modalContent.innerHTML = `
+        <span class="close-icon">&times;</span>
+        <h3>Solicitud Enviada con Éxito</h3>
+        <p><strong>Número de Radicado:</strong> ${numeroRadicado}</p>
+        <p>Se ha enviado la información a su correo.</p>
+        <div class="btn-container">
+            <button onclick="redirigirAspirante()">Aceptar</button>
+        </div>
+    `;
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
 
-    // Mostrar el modal
-    modal.style.display = "flex";
+    // Añadir evento al botón de cerrar
+    const closeButton = modalContent.querySelector('.close-icon');
+    if (closeButton) {
+        closeButton.addEventListener('click', redirigirAspirante);
+    }
 }
 
-// Función para redirigir al usuario después de aceptar
 function redirigirAspirante() {
-    document.getElementById("modalConfirmacionEnvio").remove();
-    window.location.href = "interfazAspirante.html"; // Cambia esto por la URL correcta
+    const modal = document.getElementById("modalConfirmacionEnvio");
+    if (modal) {
+        // Añadir la clase closing para la animación de salida
+        modal.classList.add("closing");
+
+        // Eliminar el modal después de la transición
+        setTimeout(() => {
+            modal.remove();
+            window.location.href = "interfazAspirante.html";
+        }, 300);
+    }
 }
