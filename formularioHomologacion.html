@@ -12,9 +12,7 @@
 
 
 </head>
-
-<body>
-    <header>
+ <header>
         <h1>Universidad Autónoma del Cauca</h1>
         <p>Proceso de Homologación Académica</p>
     </header>
@@ -111,12 +109,6 @@
                         <input type="email" id="email" required>
                         <span class="error-message"></span>
                     </div>
-
-                    <div class="form-group">
-                        <label>Confirmar Correo Electrónico:</label>
-                        <input type="email" id="confirm_email" required>
-                        <span class="error-message"></span>
-                    </div>
                     <!-- Teléfono y direccion -->
                     <div class="row">
                         <div class="form-group">
@@ -132,25 +124,7 @@
                         </div>
                     </div>
 
-                    <!-- Departamento y Municipio -->
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Departamento:</label>
-                            <select id="departamento" required onchange="updateMunicipios()">
-                                <option value="">Seleccione un departamento</option>
-                            </select>
-                            <span class="error-message"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Municipio:</label>
-                            <select id="municipio" required>
-                                <option value="">Seleccione un municipio</option>
-                            </select>
-                            <span class="error-message"></span>
-                        </div>
-                    </div>
-
+                    
                     <div class="btn-container">
                         <button type="button" class="next-button" onclick="validarFormularioStep1(1)">Siguiente</button>
                     </div>
@@ -246,10 +220,11 @@
 
                 <h3>Materias Seleccionadas</h3>
                 <div id="materias-container"></div>
+                <div class="btn-container">
 
-                <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
-                <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
-
+                    <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
+                    <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
+                </div>
             </div>
 
 
@@ -291,12 +266,15 @@
                 <h2>Confirmación</h2>
 
                 <p>Por favor, revisa tus datos antes de enviar la solicitud.</p>
+                <div class="btn-container">
 
-                <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
-                <button type="submit" class="submit-button" onclick="confirmarDatos()">Enviar</button>
+                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                    <button type="submit" class="submit-button" onclick="confirmarDatos()">Enviar</button>
+                </div>
             </div>
         </form>
     </div>
+
     <script src="JavaFormularioHomologacion.js"></script>
 </body>
 
