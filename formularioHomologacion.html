@@ -4,240 +4,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORMULARIO DE HOMOLOGACION</title>
-    <link rel="stylesheet" href="formulariohomologacione.css">
+    <title>Formulario de Homologación - Universidad Autónoma del Cauca</title>
+    <link href="formulariohomologacione.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 </head>
 
 <body>
-    <div class="container">
-        <h2>FORMULARIO DE HOMOLOGACION</h2>
+    <header>
+        <h1>Universidad Autónoma del Cauca</h1>
+        <p>Proceso de Homologación Académica</p>
+    </header>
 
-        <div id="form-container">
-            <div class="progress-container">
-                <div class="step-indicator active-indicator">1</div>
-                <div class="step-indicator">2</div>
-                <div class="step-indicator">3</div>
-                <div class="step-indicator">4</div>
-                <div class="step-indicator">5</div>
-                <div class="step-indicator">6</div>
+    <div class="container">
+        <div class="progress-container">
+            <div class="step active" data-step="1">
+                <div class="step-icon">
+                    <i class="fa-solid fa-id-badge"></i>
+                </div>
+                <div class="step-title">Datos Personales</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-icon">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <div class="step-title">Universidad de Origen</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="step-title">Programa Académico</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-icon">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="step-title">Documentos</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="step-title">Confirmación</div>
+            </div>
+        </div>
+
+        <form id="homologacion-form">
+            <div class="step-content active" id="step-1">
+                <form id="formulario">
+
+                    <!-- Tipo de Identificación y Número -->
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Tipo de Identificación:</label>
+                            <select id="tipo_identificacion" required>
+                                <option value="">Seleccione</option>
+                                <option value="TI">Tarjeta de Identidad (TI)</option>
+                                <option value="CC">Cédula de Ciudadanía (CC)</option>
+                                <option value="TE">Tarjeta de Extranjería (TE)</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Número de Identificación:</label>
+                            <input type="text" id="numero_identificacion" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Nombres -->
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Primer Nombre:</label>
+                            <input type="text" id="primer_nombre" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Segundo Nombre (Opcional):</label>
+                            <input type="text" id="segundo_nombre">
+                        </div>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Primer Apellido:</label>
+                            <input type="text" id="primer_apellido" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Segundo Apellido (Opcional):</label>
+                            <input type="text" id="segundo_apellido">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label>Correo Electrónico:</label>
+                        <input type="email" id="email" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmar Correo Electrónico:</label>
+                        <input type="email" id="confirm_email" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <!-- Teléfono y direccion -->
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Teléfono:</label>
+                            <input type="tel" id="telefono" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dirección:</label>
+                            <input type="text" id="direccion" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Departamento y Municipio -->
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Departamento:</label>
+                            <select id="departamento" required onchange="updateMunicipios()">
+                                <option value="">Seleccione un departamento</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Municipio:</label>
+                            <select id="municipio" required>
+                                <option value="">Seleccione un municipio</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="btn-container">
+                        <button type="button" class="next-button" onclick="validarFormularioStep1(1)">Siguiente</button>
+                    </div>
+
+                </form>
+            </div>
+            <!--STEP # 2 DONDE CARGAR LAS UNIVERSIDADES QUE HAY EN EL PAIS-->
+            <div class="step-content" id="step-2">
+                <h3>Universidad de Origen</h3>
+
+                <!-- Selección de País (Solo Colombia) -->
+                <label>País:</label>
+                <select id="pais" required disabled onchange="cargarDepartamentos()">
+                    <option value="Colombia">Colombia</option>
+                </select><br>
+
+                <!-- Selección de Departamento (Solo Cauca) -->
+                <label>Departamento:</label>
+                <select id="departamento" required disabled onchange="cargarCiudades()">
+                    <option value="Cauca">Cauca</option>
+                </select><br>
+
+                <!-- Selección de Ciudad (Solo Popayán) -->
+                <label>Ciudad:</label>
+                <select id="ciudad" required disabled onchange="cargarUniversidades()">
+                    <option value="Popayán">Popayán</option>
+                </select><br>
+
+                <!-- Institución de origen (se carga después de seleccionar la ciudad) -->
+                <label>Institución de origen:</label>
+                <select id="institucion" required onchange="updateFormacion()">
+                    <option value="">Seleccione</option>
+                    <option value="SENA">SENA</option>
+                    <option value="FUP">FUP</option>
+                    <option value="Colegio Mayor">Colegio Mayor</option>
+                </select><br>
+
+                <!-- Tipo de formación -->
+                <label>Tipo de formación:</label>
+                <select id="tipo_formacion" required onchange="updateCarreras()">
+                    <option value="">Seleccione</option>
+                </select><br>
+
+                <!-- Carrera / Programa -->
+                <label>Carrera / Programa:</label>
+                <select id="carrera" required>
+                    <option value="">Seleccione</option>
+                </select><br>
+
+                <!-- ¿Finalizó estudios? -->
+                <label>¿Finalizó sus estudios?</label>
+                <select id="finalizo_estudios" required onchange="toggleFechaFinalizacion()">
+                    <option value="">Seleccione</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select><br>
+
+                <!-- Fecha de Finalización -->
+                <div id="fecha_finalizacion_container" style="display: none;">
+                    <label>Fecha de Finalización de sus estudios:</label>
+                    <input type="date" id="fecha_finalizacion" required><br>
+                </div>
+
+                <!-- Fecha del Último Semestre Cursado -->
+                <div id="fecha_ultimo_semestre_container" style="display: none;">
+                    <label>Fecha del Último Semestre Cursado:</label>
+                    <input type="date" id="fecha_ultimo_semestre" required><br>
+                </div>
+                <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                <button type="button" class="next-button" onclick="validarFormularioStep2()">Siguiente</button>
+            </div>
+            <!--STEP 3-->
+
+            <div class="step-content" id="step-3">
+                <h2>Registro de Notas</h2>
+
+                <div class="form-group">
+                    <label for="semestre">Semestre:</label>
+                    <select id="semestre">
+                        <option value="">Seleccione un semestre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="materia">Materia:</label>
+                    <select id="materia">
+                        <option value="">Seleccione una materia</option>
+                    </select>
+                </div>
+
+                <button class="add-button" onclick="agregarMateria()"><i class="fa-solid fa-plus"></i> Agregar
+                    Materia</button>
+
+                <h3>Materias Seleccionadas</h3>
+                <div id="materias-container"></div>
+
+                <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
+                <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
+
             </div>
 
-            <form id="multi-step-form">
 
-                <!-- Paso 1: Datos Personales -->
-                <div class="step active">
-                    <label>Tipo de Identificación:</label>
-                    <select id="tipo_identificacion" required oninput="checkIdentificationType(this)">
-                        <option value="">Seleccione</option>
-                        <option value="TI">Tarjeta de Identidad (TI)</option>
-                        <option value="CC">Cédula de Ciudadanía (CC)</option>
-                        <option value="TE">Tarjeta de Extranjería (TE)</option>
-                    </select><br>
 
-                    <label>Número de identificación:</label>
-                    <input type="text" id="numero_identificacion" required oninput="validateNumber(this)"><br>
+            <div class="step-content" id="step-4">
+                <h2>Documentos</h2>
 
-                    <label>Primer Nombre:</label>
-                    <input type="text" id="primer_nombre" required><br>
+                <label>Documento de Identidad:</label>
+                <input type="file" id="documento_id" accept=".pdf" required><br>
 
-                    <label>Segundo Nombre (Opcional):</label>
-                    <input type="text" id="segundo_nombre"><br>
+                <label>Certificado de Notas:</label>
+                <input type="file" id="certificado_notas" accept=".pdf" required><br>
 
-                    <label>Primer Apellido:</label>
-                    <input type="text" id="primer_apellido" required><br>
+                <label>Contenido Programático:</label>
+                <input type="file" id="contenido_programatico" accept=".pdf" required><br>
 
-                    <label>Segundo Apellido (Opcional):</label>
-                    <input type="text" id="segundo_apellido"><br>
+                <label>Carta Solicitud de Homologación:</label>
+                <input type="file" id="carta_homologacion" accept=".pdf" required><br>
 
-                    <label>Correo Electrónico:</label>
-                    <input type="email" id="email" required onblur="validateEmail(this)"><br>
+                <label>Certificación de Finalización de Estudios (Opcional):</label>
+                <input type="file" id="certificacion_finalizacion" accept=".pdf"><br>
 
-                    <label>Confirmar Correo Electrónico:</label>
-                    <input type="email" id="confirm_email" required><br>
+                <!-- Documentos adicionales para extranjeros (se mostrarán si aplica) -->
+                <div id="extra-docs" class="hidden">
+                    <h3>Documentos adicionales para extranjeros</h3>
 
-                    <label>Teléfono:</label>
-                    <input type="tel" id="telefono" required oninput="validateNumber(this)"><br>
-
-                    <label>Dirección:</label>
-                    <input type="text" id="direccion" required><br>
-
-                    <label>Departamento:</label>
-                    <select id="departamento" required onchange="updateMunicipios()">
-                        <option value="">Seleccione un departamento</option>
-                    </select><br>
-
-                    <label>Municipio:</label>
-                    <select id="municipio" required>
-                        <option value="">Seleccione un municipio</option>
-                    </select><br>
-
-                    <button type="button" class="btn-save" onclick="saveStep()">Guardar</button>
+                    <label>Copia de la Visa o Pasaporte:</label>
+                    <input type="file" id="visa_pasaporte" accept=".pdf"><br>
                 </div>
-                <!-- Paso 2: Universidad de Origen -->
-                <div class="step">
-                    <h3>Universidad de Origen</h3>
-
-                    <label>Institución de origen:</label>
-                    <select id="institucion" required onchange="updateFormacion()">
-                        <option value="">Seleccione</option>
-                        <option value="SENA">SENA</option>
-                        <option value="FUP">FUP</option>
-                        <option value="Colegio Mayor">Colegio Mayor</option>
-                    </select><br>
-
-                    <label>Tipo de formación:</label>
-                    <select id="tipo_formacion" required onchange="updateCarreras()">
-                        <option value="">Seleccione</option>
-                    </select><br>
-
-                    <label>Carrera / Programa:</label>
-                    <select id="carrera" required onchange="updateMaterias()">
-                        <option value="">Seleccione</option>
-                    </select><br>
-
-                    <label>¿Finalizó sus estudios?</label>
-                    <select id="finalizo_estudios" required onchange="toggleFechaFinalizacion()">
-                        <option value="">Seleccione</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                    </select><br>
-
-                    <!-- Contenedor de Fecha de Finalización (oculto por defecto) -->
-                    <div id="fecha_finalizacion_container" style="display: none;">
-                        <label>Fecha de Finalización:</label>
-                        <input type="date" id="fecha_finalizacion"><br>
-                    </div>
-
-                    <!-- Contenedor de Fecha del Último Semestre Cursado (oculto por defecto) -->
-                    <div id="fecha_ultimo_semestre_container" style="display: none;">
-                        <label>Fecha del Último Semestre Cursado:</label>
-                        <input type="date" id="fecha_ultimo_semestre"><br>
-                    </div>
-
-
-                    <button type="button" class="btn-prev" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="btn-save" onclick="saveStep()">Guardar</button>
-
-                </div>
-                <!-- Paso 3: Notas Académicas -->
-
-                <div class="step">
-                    <h3>Notas Académicas</h3>
-                    <div id="materias-container"></div>
-                    <button type="button" class="btn-prev" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="btn-save" onclick="saveStep()">Guardar</button>
+                <div class="btn-container">
+                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                    <button type="button" class="next-button" onclick="changeStep(1)">Siguiente</button>
                 </div>
 
-                <!-- Paso 4: Documentación -->
-                <!-- Paso 4: Documentación -->
-                <div class="step">
-                    <h3>Documentación Requerida</h3>
+            </div>
 
-                    <label> Documento de Identidad:</label>
-                    <input type="file" id="documento_id" accept=".pdf" required><br>
 
-                    <label>Certificado de calificación:</label>
-                    <input type="file" id="certificado_calificacion" accept=".pdf" required><br>
+            <div class="step-content" id="step-5">
+                <h2>Confirmación</h2>
 
-                    <label>Contenido programático:</label>
-                    <input type="file" id="contenido_programatico" accept=".pdf" required><br>
+                <p>Por favor, revisa tus datos antes de enviar la solicitud.</p>
 
-                    <label>Carta solicitud de homologación:</label>
-                    <input type="file" id="carta_homologacion" accept=".pdf" required><br>
-
-                    <label>Certificación de finalización de estudios:</label>
-                    <input type="file" id="certificacion_finalizacion" accept=".pdf"><br>
-
-                    <!-- Campos adicionales solo para extranjeros  deberan solo aparecer para los extranjeros-->
-                    <div id="extra-docs" class="hidden">
-                        <h4>Documentos adicionales para extranjeros</h4>
-                        <label>Apostilla del certificado:</label>
-                        <input type="file" id="apostilla_certificado" accept=".pdf" required><br>
-
-                        <label>Copia de la Visa:</label>
-                        <input type="file" id="copia_visa" accept=".pdf" required><br>
-
-                        <label>Copia del pasaporte:</label>
-                        <input type="file" id="copia_pasaporte" accept=".pdf" required><br>
-                    </div>
-
-                    <button type="button" class="btn-prev" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="btn-save" onclick="changeStep(1)">Guardar</button>
-                </div>
-                <!-- Paso 5: Selección de Carrera en la Universidad Autónoma -->
-                <div class="step">
-                    <h3>Seleccionar Carrera en la Universidad Autónoma</h3>
-
-                    <label for="carrera_destino">Carrera a homologar:</label>
-                    <select id="carrera_destino" required onchange="mostrarMateriasHomologar()">
-                        <option value="">Seleccione una carrera</option>
-                        <option value="ingenieria_software">Ingeniería de Software</option>
-                        <option value="otra">Otra carrera</option>
-                    </select><br>
-
-                    <!-- Contenedor de materias (solo se muestra si elige Ingeniería de Software) -->
-                    <div id="materias-homologar-container" style="display: none;">
-                        <h4>Seleccione las materias que le interesa homologar:</h4>
-                        <p class="info-text">El encargado determinará si la homologación es válida.</p>
-                        <div id="materias-homologar"></div>
-                    </div>
-
-                    <!-- Sección de comentarios -->
-                    <div id="comentarios-container" style="display: none;">
-                        <h4>Comentarios u Observaciones</h4>
-                        <textarea id="comentarios" rows="4" placeholder="Escriba aquí sus observaciones..."></textarea>
-                    </div>
-
-                    <button type="button" class="btn-prev" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="btn-save" onclick="saveStep()">Guardar</button>
-                </div>
-
-                <!-- Paso 6: Confirmación -->
-                <div class="step">
-                    <h3>Confirmación</h3>
-                    <p>Revise los datos ingresados antes de finalizar.</p>
-                    <button type="button" class="btn-prev" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="btn-submit" onclick="mostrarConfirmacion()">Finalizar</button>
-                </div>
-
-            </form>
-        </div>
+                <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                <button type="submit" class="submit-button" onclick="confirmarDatos()">Enviar</button>
+            </div>
+        </form>
     </div>
-
-    <!-- Modal de Confirmación -->
-    <div id="modal-confirmacion" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Confirmación de Datos</h3>
-            <p>Revise los datos ingresados antes de finalizar:</p>
-            <div id="datos-confirmacion"></div>
-            <p><strong>¿Desea confirmar la solicitud?</strong></p>
-            <button onclick="confirmarSolicitud()">Sí, Confirmar</button>
-            <button onclick="cerrarModal()">Cancelar</button>
-        </div>
-    </div>
-
-    <!-- Modal de Radicado -->
-    <div id="modal-radicado" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Solicitud Enviada</h3>
-            <p>Su solicitud ha sido registrada con el siguiente número de radicado:</p>
-            <p><strong id="numero-radicado"></strong></p>
-            <button onclick="enviarFormulario()">Aceptar</button>
-        </div>
-    </div>
-
     <script src="JavaFormularioHomologacion.js"></script>
-
-    <script>
-        function enviarFormulario() {
-            // Close the modal first
-            document.getElementById('modal-radicado').style.display = 'none';
-            
-            // Redirect to visualizacionhomo.html
-            window.location.href = 'visualizacionhomo.html';
-        }
-    </script>
-
 </body>
 
 </html>
