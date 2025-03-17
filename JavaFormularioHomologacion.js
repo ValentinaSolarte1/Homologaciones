@@ -1,26 +1,41 @@
 //FUNCION PARA EL BOTON SIGUENTE Y EL ANTERIOR
 
 
-let currentStep = 1; // Inicializa el paso actual
+
+let currentStep = 1; // Asegurar que currentStep esté definido globalmente
 
 function changeStep(stepChange) {
     let steps = document.querySelectorAll(".step-content");
     let indicators = document.querySelectorAll(".step");
 
+    // Calcular el nuevo paso asegurando que no salga de los límites
+    let newStep = currentStep + stepChange;
+    
+    if (newStep < 1) {
+        newStep = 1; // No permitir ir a un paso menor que 1
+    } 
+    if (newStep > steps.length) {
+        newStep = steps.length; // No permitir ir más allá del último paso
+    }
+
+    // Si el paso no ha cambiado, no hacer nada
+    if (newStep === currentStep) return;
+
     // Ocultar el paso actual
     steps[currentStep - 1].classList.remove("active");
     indicators[currentStep - 1].classList.remove("active");
 
-    // Calcular el nuevo paso
-    let newStep = currentStep + stepChange;
-    if (newStep < 1) newStep = 1;
-    if (newStep > steps.length) newStep = steps.length;
-    currentStep = newStep; // Actualizar el paso actual
+    // Actualizar el paso actual
+    currentStep = newStep;
 
     // Mostrar el nuevo paso
     steps[currentStep - 1].classList.add("active");
     indicators[currentStep - 1].classList.add("active");
+
+    // Asegurar que el contenedor del paso esté visible
+    steps[currentStep - 1].scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
 
 // PARA QUE FUNCIONE LA BARRA DE PROGRESO
 document.addEventListener("DOMContentLoaded", function () {
