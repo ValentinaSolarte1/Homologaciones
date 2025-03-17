@@ -1,564 +1,738 @@
-/* Variables de color */
 :root {
     --azul-oscuro: #19407b;
     --azul-medio: #0075bf;
     --azul-claro: #08dcff;
     --blanco: #ffffff;
     --gris-claro: #f4f4f4;
+    --gris-medio: #e0e0e0;
     --borde: #dddddd;
     --sombra: rgba(0, 0, 0, 0.1);
     --rojo-error: #ff4d4d;
+    --verde-exito: #4CAF50;
+    --font-primary: 'Roboto', Arial, sans-serif;
 }
 
-/* Estilos generales */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--gris-claro);
+* {
     margin: 0;
-    padding: 20px; padding: 20px; /* Espacio alrededor del contenido */ display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+body {
+    background-color: var(--gris-claro);
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    min-width: 320px;
 }
 
-/* Contenedor principal */
+header,
 .container {
-    background: var(--blanco);
     width: 90%;
-    max-width: 800px;
-    padding: 25px;
-    box-shadow: 0px 4px 10px var(--sombra);
+    max-width: 1000px;
+    margin: 3vh auto;
     border-radius: 10px;
-    overflow: hidden;
-    animation: fadeIn 0.5s ease-in-out;
-    gap: 20px; /* Espacio entre elementos internos */
-}
-
-/* Títulos */
-h2, h3 {
+    box-shadow: 0 4px 6px var(--sombra);
+    padding: 20px;
     text-align: center;
-    color: var(--azul-oscuro);
-    margin-bottom: 15px;
 }
-
-/* Barra de progreso */
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+h2 {
+    color: var(--azul-medio);
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+/* Barra de progreso*/
 .progress-container {
     display: flex;
     justify-content: space-between;
+    /* Distribuye los elementos horizontalmente */
     align-items: center;
+    width: 100%;
+    max-width: 800px;
+    /* Ajusta el ancho según necesites */
+    margin: 20px auto;
+    /* Centra la barra de progreso */
+    position: relative;
+}
+.step-progress {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    padding: 10px;
-    background: var(--blanco);
-    border-radius: 8px;
-    box-shadow: 0px 2px 5px var(--sombra);
+    position: relative;
 }
-
-.step-indicator {
-    width: 40px;
-    height: 40px;
-    background: var(--borde);
-    color: var(--azul-oscuro);
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    font-size: 16px;
-}
-
-.step-indicator.active-indicator {
-    background: var(--azul-medio);
-    color: var(--blanco);
-    transform: scale(1.2);
-}
-
-/* Animación de transición entre pasos */
-.step {
-    display: none;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.step.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Estilos para formularios */
-.form-container {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Estilos de inputs, selects y textareas */
-input, select, textarea {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin: 10px 0; /* Espaciado entre cada input */
-    border: 1px solid var(--borde);
-    border-radius: 5px;
-    font-size: 16px;
-    background: var(--blanco);
-    transition: all 0.3s ease;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: var(--azul-medio);
-    outline: none;
-    box-shadow: 0px 0px 8px var(--azul-medio);
-}
-
-/* Animación de error en inputs */
-.input-error {
-    border: 2px solid var(--rojo-error);
-    background-color: #ffe6e6;
-    animation: shake 0.3s ease-in-out;
-}
-
-/* Botones generales */
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Botón de guardar y continuar */
-
-
-.btn-save:enabled {
-    background-color: var(--azul-medio);
-    color: var(--blanco);
-    cursor: pointer;
-}
-
-.btn-save:enabled:hover {
-    background-color: var(--azul-claro);
-}
-
-/* Botones de navegación */
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 100px;
-}
-
-
-.btn-prev {
-    flex: 1; /* Ambos botones ocupan el mismo espacio */
-    background-color: var(--gris-claro);
-    border: 1px solid var(--borde);
-    color: var(--azul-medio);
-    gap: 10px;
-    margin: 10px 0; /* Espaciado entre cada input */
-}
-.btn-prev:hover {
-    background-color: var(--azul-medio);
-    color: var(--blanco);
-}
-.btn-next, .btn-submit {
-    flex: 1; /* Ambos botones ocupan el mismo espacio */
-    background: var(--azul-medio);
-    color: var(--blanco);
-}
-
-.btn-submit {
-    background: var(--azul-claro);
-}
-
-.btn-prev:hover, .btn-next:hover, .btn-submit:hover {
-    opacity: 0.8;
-}
-/* Botones de navegación */
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
-    gap: 15px;
-    padding: 10px 0; /* Espaciado superior e inferior */
-}
-
-.btn-prev, .btn-save {
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-
-
-.btn-save {
-    background-color: var(--azul-medio);
-    border: none;
-    color: var(--blanco);
-    box-shadow: 0 2px 10px rgba(0, 117, 191, 0.3);
-}
-
-.btn-save:hover {
-    background-color: var(--azul-oscuro);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 117, 191, 0.4);
-}
-
-.btn-save:active, .btn-prev:active {
-    transform: translateY(0);
-}
-
-/* Contenedor de cada paso */
-.step {
-    background: var(--blanco);
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px var(--sombra);
-}
-
-/* Estilos para los modales */
-.modal {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
+.step-progress::before {
+    content: "";
+    position: absolute;
+    top: 50%;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s ease-in-out;
+    right: 0;
+    height: 4px;
+    background-color: var(--gris-medio);
+    z-index: 1;
+    transform: translateY(-50%);
 }
-
-.modal-content {
-    background: var(--blanco);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.progress-bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    background-color: var(--azul-medio);
+    z-index: 2;
+    transform: translateY(-50%);
+    transition: width 0.5s ease;
+}
+.step {
+    width: 18%;
     text-align: center;
-    width: 90%;
-    max-width: 500px;
-    animation: slideDown 0.3s ease-in-out;
-}
-
-/* Botones dentro del modal */
-.modal-content button {
-    width: auto;
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    background: var(--azul-medio);
-    color: var(--blanco);
-    border-radius: 5px;
+    z-index: 3;
+    position: relative;
     cursor: pointer;
+}
+/*icono solo*/
+.step-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--blanco);
+    /* Fondo blanco del ícono */
+    border: 3px solid var(--gris-medio);
+    /* Borde gris medio */
+    border-radius: 50%;
+    /* Forma circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    /* Centrado con margen inferior */
+    position: relative;
     transition: all 0.3s ease;
+    /* Transición suave en cambios */
+}
+/* Estilos para el ícono cuando el paso está activo */
+.step.active .step-icon {
+    position: relative;
+    width: 60px;
+    /* Tamaño más grande cuando está activo */
+    height: 60px;
+    background-color: var(--azul-oscuro);
+    /* Fondo azul oscuro */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* Se coloca por encima de otros elementos */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    color: var(--blanco);
+    /* Color de texto blanco */
+    animation: pulse 7s infinite;
+    /* Animación de pulso cada 7s */
+}
+/* Estilos para el ícono cuando el paso está completado */
+.step.completed .step-icon {
+    border-color: var(--verde-exito);
+    /* Borde en color verde */
+    background-color: var(--blanco);
+    /* Fondo blanco */
 }
 
-.modal-content button:hover {
-    background: var(--azul-claro);
+/*TITULO DE EL STEP CUANDO EST INACTIVO*/
+.step-title {
+    font-size: 14px;
+    color: var(--azul-oscuro);
+    font-weight: 500;
+    margin-top: 10px;
+}
+/*TITULO DE CADA STEP CUANDO ESTA ACTIVO*/
+.step.active .step-title {
+    color: var(--azul-medio);
+    font-weight: 700;
+}
+.step-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+.step-content.active {
+    display: block;
 }
 
-/* Animaciones */
+/*Aqui se cambia el tamaño del icono */
+.step-icon i {
+    font-size: 24px;
+    /* Cambia el tamaño del icono */
+    flex: auto;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(20px);
     }
+
     to {
         opacity: 1;
-    }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-20px);
-    }
-    to {
         transform: translateY(0);
     }
 }
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px var(--azul-medio);
+    }
 
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    50% {
+        box-shadow: 0 0 20px var(--azul-claro);
+    }
+
+    100% {
+        box-shadow: 0 0 10px var(--azul-medio);
+    }
 }
-
-/* Mejorar el diseño de los inputs de archivos */
-input[type="file"] {
+.form-group {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--azul-oscuro);
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
     border: 1px solid var(--borde);
-    padding: 8px;
-    background: var(--gris-claro);
+    border-radius: 5px;
+    background-color: var(--blanco);
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--azul-medio);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 117, 191, 0.2);
+}
+.file-upload {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border: 2px dashed var(--borde);
+    border-radius: 5px;
+    background-color: var(--gris-claro);
+    transition: all 0.3s;
+}
+.file-upload:hover {
+    background-color: var(--gris-medio);
+}
+.file-upload svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    color: var(--azul-medio);
+}
+.file-upload p {
+    margin-bottom: 10px;
+    color: var(--azul-oscuro);
+}
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
     cursor: pointer;
 }
-
-/* Cambiar el estilo de archivos requeridos si no se han subido */
-input[type="file"].input-error {
-    border: 2px solid var(--rojo-error);
-    background-color: #ff9292;
+.file-list {
+    margin-top: 20px;
+    width: 100%;
 }
-/* Contenedor de Notas Académicas */
-
-
-.container {
-    max-width: 800px; /* Ajusta según necesites */
-    margin: auto;
-    padding: 20px;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Encabezado */
-.header {
-    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));
-    color: var(--blanco);
-    padding: 20px;
-    text-align: center;
-}
-
-.header h1 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.header p {
-    opacity: 0.9;
-    font-size: 16px;
-}
-
-/* Indicador de pasos */
-.steps-indicator {
+.file-item {
     display: flex;
     justify-content: space-between;
-    padding: 15px 40px;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid var(--borde);
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--blanco);
+    border-radius: 5px;
+    border-left: 4px solid var(--azul-medio);
+    box-shadow: 0 2px 5px var(--sombra);
 }
-
-.step-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--gris-claro);
-    border: 2px solid var(--azul-medio);
+.file-name {
+    display: flex;
+    align-items: center;
+}
+.file-name i {
+    margin-right: 10px;
+    color: var(--azul-medio);
+}
+.remove-file {
+    color: var(--rojo-error);
+    cursor: pointer;
+    padding: 5px;
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+.form-col {
+    flex: 1;
+    padding: 0 10px;
+    min-width: 200px;
+}
+/* 🔹 Estilos base para todos los botones */
+.btn, .prev-button, .next-button, .btn-submit, .save-button, .add-button, .submit-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Roboto", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    color: var(--azul-medio);
-    position: relative;
+    gap: 8px;
+    box-shadow: 0 4px 6px var(--sombra);
 }
 
-.step-circle.active {
+/* 🔹 Botón de retroceso */
+.prev-button {
+    background-color: var(--gris-medio);
+    color: var(--azul-oscuro);
+}
+.prev-button:hover {
+    background-color: #b8b8b8;
+    transform: scale(1.05);
+}
+.prev-button:active {
+    transform: scale(0.95);
+}
+
+/* 🔹 Botón de avance */
+.next-button {
     background-color: var(--azul-medio);
     color: var(--blanco);
 }
-
-.step-circle.completed {
+.next-button:hover {
     background-color: var(--azul-oscuro);
-    border-color: var(--azul-oscuro);
+    transform: scale(1.05);
+}
+.next-button:active {
+    transform: scale(0.95);
+}
+
+/* 🔹 Botón de enviar */
+.btn-submit, .submit-button {
+    background-color: var(--verde-exito);
     color: var(--blanco);
 }
-
-.step-line {
-    flex: 1;
-    height: 2px;
-    background-color: var(--borde);
-    margin: 0 5px;
-    position: relative;
-    top: 15px;
+.btn-submit:hover, .submit-button:hover {
+    background-color: #3d8b40;
 }
 
-/* Paso actual del formulario */
-.step {
-    padding: 25px;
-    animation: fadeInStep 0.5s ease;
-}
-
-@keyframes fadeInStep {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.step h3 {
-    color: var(--azul-oscuro);
-    margin-bottom: 20px;
-    font-size: 20px;
-    border-bottom: 2px solid var(--azul-claro);
-    padding-bottom: 10px;
-}
-
-/* Selector de carrera */
-.carrera-selector {
-    margin-bottom: 20px;
-}
-
-.carrera-selector select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--borde);
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: var(--blanco);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carrera-selector select:focus {
-    border-color: var(--azul-medio);
-    box-shadow: 0 0 0 3px rgba(0, 117, 191, 0.2);
-    outline: none;
-}
-
-/* Contenedor de materias */
-#materias-container {
-    margin: 15px 0 25px 0;
-}
-
-/* Semestre */
-#materias-container > div:first-child {
-    margin-top: 0;
-}
-
-#materias-container h4 {
-    background-color: var(--azul-oscuro);
+/* 🔹 Botón Guardar */
+.save-button {
+    background: var(--azul-medio);
     color: var(--blanco);
-    padding: 10px 15px;
-    margin: 20px 0 10px 0;
-    border-radius: 5px;
-    font-weight: bold;
-    animation: slideDown 0.5s ease;
+}
+.save-button:hover {
+    background: var(--azul-oscuro);
 }
 
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 🔹 Botón "Agregar Materia" */
+.add-button {
+    background: var(--azul-medio);
+    color: var(--blanco);
+}
+.add-button:hover {
+    background: var(--azul-oscuro);
+    transform: scale(1.05);
+}
+.add-button:active {
+    transform: scale(0.95);
 }
 
-/* Filas de materias */
-#materias-container > div:not(:first-child):not(:has(h4)) {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: 15px;
-    align-items: center;
-    padding: 12px 15px;
-    margin: 10px 0;
-    background-color: var(--blanco);
-    border: 1px solid var(--borde);
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.3s ease;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#materias-container > div:not(:first-child):hover:not(:has(h4)) {
-    border-color: var(--azul-claro);
-    box-shadow: 0 2px 8px var(--sombra);
-    transform: translateY(-2px);
-}
-
-/* Etiquetas y campos de nota */
-#materias-container label {
-    font-weight: 500;
-}
-
-.nota-input {
-    width: 100px;
-    padding: 8px 12px;
-    border: 1px solid var(--borde);
-    border-radius: 4px;
-    text-align: center;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-.nota-input:focus {
-    border-color: var(--azul-medio);
-    box-shadow: 0 0 0 3px rgba(0, 117, 191, 0.2);
-    outline: none;
-}
-
-.nota-input:disabled {
-    background-color: var(--gris-claro);
+/* 🔹 Botón deshabilitado */
+button:disabled {
+    background: var(--gris-medio);
     cursor: not-allowed;
+    opacity: 0.6;
 }
 
-/* Checkbox "No Aplica" */
-#materias-container input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    vertical-align: middle;
-    cursor: pointer;
+/* 🔹 Efecto al presionar */
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px var(--sombra);
+}
+
+/* 🔹 Contenedor de botones */
+.btn-container {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Alinea verticalmente */
+    gap: 20px; /* Espacio entre los botones */
+    margin-top: 20px;
 }
 
 
-/* Responsivo */
+.confirmation-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: var(--gris-claro);
+    border-radius: 5px;
+}
+.confirmation-item h3 {
+    color: var(--azul-oscuro);
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 5px;
+}
+.confirmation-item p {
+    margin-bottom: 5px;
+    display: flex;
+}
+.confirmation-item strong {
+    min-width: 150px;
+    display: inline-block;
+}
+footer {
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+.error-message {
+    color: var(--rojo-error);
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+input.error,
+select.error {
+    border-color: var(--rojo-error);
+}
+.required-field::after {
+    content: "*";
+    color: var(--rojo-error);
+    margin-left: 4px;
+}
+/* Estilos específicos del header */
+header {
+    width: 90%;
+    max-width: 1000px;
+    margin: 3vh auto;
+    text-align: center;
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--sombra);
+
+}
+
+/* Estilos del título y subtítulo */
+header h1 {
+    font-size: 2rem;
+    margin: 0;   
+     color: #08dcff;
+
+}
+header p {
+    font-size: 1.2rem;
+    margin: 5px 0 0 0;
+}
+/* Contenedor principal */
+.container {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--sombra);
+    padding: 2rem;
+    flex: 1;
+}
+/* 📱 Diseño Responsivo: Tablets y móviles (máx. 768px) */
 @media (max-width: 768px) {
-    #materias-container > div:not(:first-child):not(:has(h4)) {
-        grid-template-columns: 1fr;
+    .container {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+
+    header {
+        max-width: 98%;
+        padding: 1rem;
+    }
+
+    .step-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .step-title {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Ajustes para los pasos */
+    .steps-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        width: 100%;
+    }
+
+    .step-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .step-icon i {
+        font-size: 20px;
+    }
+}
+/* 📱 Diseño Responsivo: Móviles pequeños (máx. 480px) */
+@media (max-width: 480px) {
+    .container {
+        max-width: 98%;
+        padding: 1rem;
+    }
+
+    header {
+        width: 98%;
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1rem;
+    }
+
+    header p {
+        font-size: 0.5rem;
+    }
+
+    .progress-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        width: auto;
+        margin-bottom: 10px;
+    }
+
+    .step-progress::before {
+        display: none;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
         gap: 10px;
     }
-    
-    #materias-container label {
-        margin-bottom: 5px;
+
+    .btn {
+        width: 100%;
+        text-align: center;
     }
-    
-    .steps-indicator {
-        padding: 15px 20px;
+
+
+
+    h2 {
+        font-size: 18px;
     }
-}/* Estilo de cada fila de materia */
+
+    h3 {
+        font-size: 16px;
+    }
+
+    /* Ajustes para el área de carga de archivos */
+    .file-upload {
+        padding: 20px;
+    }
+
+    .file-upload svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+/* 📱 Ajustes en móviles pequeños */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+}
+/* 📱 Ajustes en móviles muy pequeños */
+@media (max-width: 360px) {
+    header h1 {
+        font-size: 1rem;
+    }
+
+    header p {
+        font-size: 0.8rem;
+    }
+
+    .container {
+        width: 98%;
+        padding: 0.8rem;
+    }
+}
+/* 📱 Ajustes en dispositivos extremadamente pequeños */
+@media (max-width: 320px) {
+    header h1 {
+        font-size: 0.9rem;
+    }
+
+    header p {
+        font-size: 0.7rem;
+    }
+}
+/* 📱 Diseño Responsivo */
+@media (max-width: 480px) {
+    .row {
+        flex-direction: column;
+    }
+}
+/* Responsivo */
+@media (max-width: 500px) {
+    #modalConfirmacion div {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #modalConfirmacion button {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.row {
+    display: flex;
+    gap: 10px;
+}
+.row .form-group {
+    flex: 1;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+/* Campos obligatorios en rojo si están vacíos */
+.error {
+    border-color: red !important;
+    background-color: #d8b4b4a4;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+/* notas*/
+/* 🔹 Contenedor general de la materia */
 .materia-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 8px;
-    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    background: var(--blanco);
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--borde);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 15px;
 }
-
-/* Estilo cuando se selecciona "No Aplica" */
-.materia-seleccionada {
-    background: #d4f8d4; /* Verde claro */
-    transform: scale(1.02);
+/* 🔹 Nombre de la materia con ancho fijo */
+.materia-label {
+    width: 200px; /* Ajusta según lo que necesites */
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Evita desbordamiento */
+    text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
 }
-
-/* Estilos para el switch */
+/* 🔹 Contenedor de la nota */
+.input-container {
+    display: flex;
+    align-items: center;
+}
+/* 📥 Input de nota */
+.nota-input {
+    width: 100px;
+    padding: 6px;
+    text-align: center;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+    font-size: 14px;
+}
+/* 🔹 Contenedor del switch */
+.switch-container {
+    display: flex;
+    flex-direction: column; /* Para que el texto "Cursada" esté arriba del switch */
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+}
+/* 🔹 Estilo del texto "Cursada" */
+.switch-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--azul-oscuro);
+}
+/*  Switch */
 .switch {
     position: relative;
-    display: inline-block;
     width: 40px;
-    height: 20px;
+    height: 22px;
 }
-
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 .slider {
     position: absolute;
     cursor: pointer;
@@ -566,28 +740,148 @@ input[type="file"].input-error {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
+    background: var(--gris-medio);
     border-radius: 34px;
+    transition: background 0.3s ease;
 }
-
 .slider:before {
     position: absolute;
     content: "";
-    height: 14px;
-    width: 14px;
+    height: 16px;
+    width: 16px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
+    background: var(--blanco);
     border-radius: 50%;
+    transition: transform 0.3s ease;
 }
-
-/* Cambiar color cuando está activado */
+/* Activación del switch */
 .switch input:checked + .slider {
-    background-color: #0075bf; /* Azul */
+    background: var(--azul-claro);
 }
-
 .switch input:checked + .slider:before {
     transform: translateX(18px);
+}
+
+.semestre-container {
+    display: flex;
+    flex-direction: column;
+}
+/* Ordenar los semestres alfabéticamente */
+.semestre-A { order: 1; }
+.semestre-B { order: 2; }
+.semestre-C { order: 3; }
+.semestre-D { order: 4; }
+/* Agrega más según sea necesario */
+
+/* Estilos para el modal */
+#modalConfirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Estilos de los botones en el modal */
+#modalConfirmacion button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+}
+/* Botón de Confirmar */
+#modalConfirmacion button:first-of-type {
+    background: var(--verde-exito);
+    color: var(--blanco);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+#modalConfirmacion button:first-of-type:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+/* Botón de Rechazar */
+#modalConfirmacion button:last-of-type {
+    background: var(--rojo-error);
+    color: var(--blanco);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+#modalConfirmacion button:last-of-type:hover {
+    background: #d43f3f;
+    transform: scale(1.05);
+}
+
+
+/* Estilos generales del modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Contenedor del modal */
+.modal-content {
+    background: var(--blanco);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px var(--sombra);
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Botón dentro del modal */
+.modal-content button {
+    background: var(--azul-medio);
+    color: var(--blanco);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: var(--azul-oscuro);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
