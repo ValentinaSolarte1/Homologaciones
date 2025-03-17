@@ -35,7 +35,7 @@
             <form id="login-form">
                 <div class="input-group">
                     <label>Correo Electrónico:</label>
-                    <input type="email" id="email" name="Correo" placeholder="Ingrese su correo" required>
+                    <input type="email" id="email" name="Correo" placeholder="Ingrese su correo"require><br>
                     <span class="input-icon"></span>
                 </div>
 
@@ -49,15 +49,13 @@
                     <input type="checkbox" id="remember" name="remember">
                     <label for="remember">Recordar mis datos</label>
                 </div>
-                
-                <button type="button" class="login-btn" id="login-btn" onclick="handleLogin()">INGRESAR</button>
 
-                <!-- Opción para registro si no tiene cuenta -->
+                <button type="submit" class="login-btn">INGRESAR</button>
             </form>
 
             <div class="help-links">
-                 <a href="formulario_Registro_Usuarios.html" onclick="redirectToRegister()">Regístrate aquí</a>
-                <a href="#">Contactar soporte</a>
+                <a href="registro.html">Registrate Aqui</a>
+                <a href="paginaprincipal.html">Contactar soporte</a>
             </div>
         </div>
 
@@ -65,7 +63,6 @@
             Universidad Autónoma del Cauca © 2025 - Sistema de Homologaciones
         </div>
     </div>
-
     <script src="login.js"></script>
 </body>
 
