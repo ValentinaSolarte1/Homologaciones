@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("Script cargado correctamente");
+
     // Toggle para mostrar/ocultar contraseña
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
@@ -7,28 +9,61 @@ document.addEventListener('DOMContentLoaded', function () {
         togglePassword.addEventListener('click', function () {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            this.classList.toggle('active'); // Opcional: cambiar icono
+            this.classList.toggle('active'); // Cambia el icono si es necesario
         });
+    } else {
+        console.error("No se encontró el botón de toggle o el input de contraseña.");
     }
 
     // Efecto de enfoque en los inputs
     const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function () {
-            this.parentElement.classList.add('focused');
-        });
+    if (inputs.length > 0) {
+        inputs.forEach(input => {
+            input.addEventListener('focus', function () {
+                if (this.parentElement) this.parentElement.classList.add('focused');
+            });
 
-        input.addEventListener('blur', function () {
-            this.parentElement.classList.remove('focused');
+            input.addEventListener('blur', function () {
+                if (this.parentElement) this.parentElement.classList.remove('focused');
+            });
         });
-    });
+    } else {
+        console.warn("No se encontraron inputs en el DOM.");
+    }
+
+    // Evento para el botón de login
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', handleLogin);
+    } else {
+        console.error("No se encontró el botón de login.");
+    }
+
+    // Evento para el botón de registro
+    const registerBtn = document.getElementById('register-btn');
+    if (registerBtn) {
+        registerBtn.addEventListener('click', redirectToRegister);
+    } else {
+        console.warn("No se encontró el botón de registro.");
+    }
 });
 
+// Función para manejar el inicio de sesión
 function handleLogin() {
-    const email = document.getElementById('email').value.trim().toLowerCase();
-    const password = document.getElementById('password').value.trim();
+    console.log("handleLogin() ejecutado");
+
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
     const errorMessage = document.getElementById('error-message');
     const loginBtn = document.getElementById('login-btn');
+
+    if (!emailInput || !passwordInput || !errorMessage || !loginBtn) {
+        console.error("Uno o más elementos no fueron encontrados en el DOM.");
+        return;
+    }
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value.trim();
 
     // Reset del mensaje de error
     errorMessage.style.display = 'none';
@@ -59,8 +94,16 @@ function handleLogin() {
     }
 }
 
+// Función para simular el login y redirigir
 function simulateLogin(redirectUrl) {
+    console.log("Simulando inicio de sesión...");
+
     const loginBtn = document.getElementById('login-btn');
+    if (!loginBtn) {
+        console.error("Botón de login no encontrado.");
+        return;
+    }
+
     loginBtn.textContent = 'INGRESANDO...';
     loginBtn.disabled = true;
 
@@ -71,5 +114,6 @@ function simulateLogin(redirectUrl) {
 
 // Función para redirigir a la página de registro
 function redirectToRegister() {
-    window.location.href = 'formulario_Registro_Usuarios.html';
+    console.log("Redirigiendo a formulario de homologación...");
+    window.location.href = 'registro.html';
 }
