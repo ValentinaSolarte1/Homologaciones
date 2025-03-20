@@ -12,7 +12,9 @@
 
 
 </head>
- <header>
+
+<body>
+    <header>
         <h1>Universidad Autónoma del Cauca</h1>
         <p>Proceso de Homologación Académica</p>
     </header>
@@ -124,7 +126,29 @@
                         </div>
                     </div>
 
-                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label>País:</label>
+                            <select id="pais" required disabled onchange="cargarDepartamentos()">
+                                <option value="Colombia">Colombia</option>
+                            </select><br>
+                        </div>
+                        <div class="form-group">
+                            <label>Departamento:</label>
+                            <select id="departamento" required onchange="updateMunicipios()">
+                                <option value="">Seleccione un departamento</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Municipio:</label>
+                            <select id="municipio" required>
+                                <option value="">Seleccione un municipio</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
                     <div class="btn-container">
                         <button type="button" class="next-button" onclick="validarFormularioStep1(1)">Siguiente</button>
                     </div>
@@ -137,7 +161,7 @@
 
                 <!-- Selección de País (Solo Colombia) -->
                 <label>País:</label>
-                <select id="pais" required disabled onchange="cargarDepartamentos()">
+                <select id="pais" required disabled onchange="cargarPaises()">
                     <option value="Colombia">Colombia</option>
                 </select><br>
 
@@ -193,8 +217,11 @@
                     <label>Fecha del Último Semestre Cursado:</label>
                     <input type="date" id="fecha_ultimo_semestre" required><br>
                 </div>
-                <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
-                <button type="button" class="next-button" onclick="validarFormularioStep2()">Siguiente</button>
+
+                <div class="btn-container">
+                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                    <button type="button" class="next-button" onclick="validarFormularioStep2()">Siguiente</button>
+                </div>
             </div>
             <!--STEP 3-->
 
@@ -274,7 +301,6 @@
             </div>
         </form>
     </div>
-
     <script src="JavaFormularioHomologacion.js"></script>
 </body>
 
