@@ -7,6 +7,7 @@
     <title>Sistema de Homologación - Universidad Autónoma del Cauca</title>
     <link rel="stylesheet" href="paginaprincipal.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -14,8 +15,9 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="https://buscacarrera.com.co/public/content/logos/estandar/corporacion-universitaria-autonoma-del-cauca_550x420.jpg" alt="Logo Universidad del Cauca">
-                <h1>Universidad del Cauca</h1>
+                <img src="https://buscacarrera.com.co/public/content/logos/estandar/corporacion-universitaria-autonoma-del-cauca_550x420.jpg"
+                    alt="Logo Universidad Autónoma del Cauca">
+                <h1>Universidad Autónoma del Cauca</h1>
             </div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
@@ -28,13 +30,15 @@
     </header>
 
     <!-- Banner -->
+    <!-- Banner -->
     <section class="banner" id="inicio">
         <div class="banner-content">
             <h2>Sistema de Homologación Académica</h2>
-            <p>Tu camino hacia la excelencia académica en la Universidad del Autónoma Cauca</p>
-            <a href="homoformulario.html" class="btn">Comenzar Proceso</a>
+            <p>Tu camino hacia la excelencia académica en la Universidad Autónoma del Cauca</p>
+            <a href="registro.html" class="btn">Comenzar Proceso</a>
         </div>
     </section>
+
 
     <!-- Main Content -->
     <main class="container">
@@ -46,7 +50,7 @@
                     <div class="step-number">1</div>
                     <h3>Registro en el Sistema</h3>
                     <p>Complete el formulario de registro para obtener acceso al sistema de homologación.</p>
-                    <a href="formulario_Registro_Usuarios.html" class="btn">Registrarse</a>
+                    <a href="#registro" class="btn">Registrarse</a>
                 </div>
                 <div class="step animate-fade-in">
                     <div class="step-number">2</div>
@@ -77,7 +81,7 @@
         </section>
 
 
-        <!-- Homologation Form (Initially Hidden) -->
+        <!-- Homologation Form (Hidden) -->
         <section id="homologacion-section" class="form-section hidden">
             <h2 class="section-title">Solicitud de Homologación</h2>
             <form id="homologacion-form">
@@ -149,23 +153,6 @@
                     <input type="file" id="certificacion_finalizacion" accept=".pdf">
                 </div>
 
-                <!-- Campos adicionales solo para extranjeros -->
-                <div id="extra-docs" class="hidden">
-                    <h4>Documentos adicionales para extranjeros</h4>
-                    <div class="form-group">
-                        <label>Apostilla del certificado:</label>
-                        <input type="file" id="apostilla_certificado" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Copia de la Visa:</label>
-                        <input type="file" id="copia_visa" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Copia del pasaporte:</label>
-                        <input type="file" id="copia_pasaporte" accept=".pdf" required>
-                    </div>
-                </div>
-
                 <div class="form-footer">
                     <button type="submit" class="btn">Enviar Solicitud</button>
                 </div>
@@ -205,6 +192,186 @@
             </div>
         </section>
 
+
+
+        <!-- Contenido previo omitido por brevedad -->
+
+        <!-- Contact Section (continuación) -->
+        <section id="contacto">
+            <h2 class="section-title">Contáctenos</h2>
+            <div class="contact-container">
+                <div class="contact-info animate-fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Dirección</h4>
+                            <p>Calle 5 No. 3-85, Campus Principal</p>
+                            <p>Popayán, Cauca, Colombia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Teléfonos</h4>
+                            <p>PBX: (602) 8213000</p>
+                            <p>Oficina de Homologaciones: Ext. 1245</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Correo Electrónico</h4>
+                            <p><a href="mailto:homologaciones@uniautonoma.edu.co">homologaciones@uniautonoma.edu.co</a>
+                            </p>
+                            <p><a href="mailto:admisiones@uniautonoma.edu.co">admisiones@uniautonoma.edu.co</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horario de Atención</h4>
+                            <p>Lunes a Viernes: 8:00 AM - 12:00 PM y 2:00 PM - 6:00 PM</p>
+                            <p>Sábados: 8:00 AM - 12:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="social-media">
+                        <h4>Síguenos en Redes Sociales</h4>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/UniAutonomaDelCauca" class="social-icon" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/UniautonomaC" class="social-icon" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/uniautonoma/" class="social-icon" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/channel/UC-0xd6W79SeyFaC9MxFQdPg" class="social-icon"
+                                target="_blank">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form animate-fade-in">
+                    <h3>Envíenos un Mensaje</h3>
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo*</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico*</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto*</label>
+                                <input type="text" id="asunto" name="asunto" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje*</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                        </div>
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">Enviar
+                                Mensaje</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="map-container animate-fade-in">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.066851383618!2d-76.6063723!3d2.4417889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e300410eb607c65%3A0x614545787e0ce96f!2sCorporaci%C3%B3n%20Universitaria%20Aut%C3%B3noma%20del%20Cauca!5e0!3m2!1ses!2sco!4v1710704256158!5m2!1ses!2sco"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Universidad Autónoma del Cauca - Sistema de Homologación</p>
+        </footer>
+
+        <script>
+            // Script para animar elementos cuando aparecen en el viewport
+            document.addEventListener('DOMContentLoaded', function () {
+                const animateElements = document.querySelectorAll('.animate-fade-in');
+
+                function checkIfInView() {
+                    animateElements.forEach(function (element) {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const windowHeight = window.innerHeight;
+
+                        if (elementTop < windowHeight - 100) {
+                            element.style.opacity = '1';
+                            element.style.transform = 'translateY(0)';
+                        }
+                    });
+                }
+
+                // Asignar animación con delay para que sea secuencial
+                animateElements.forEach(function (element, index) {
+                    element.style.animationDelay = (index * 0.2) + 's';
+                });
+
+                // Verificar posición inicial
+                checkIfInView();
+
+                // Verificar al hacer scroll
+                window.addEventListener('scroll', checkIfInView);
+
+                // Smooth scrolling para los enlaces internos
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80, // Ajuste para el header fijo
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+
+                // Validación básica de formularios
+                const contactForm = document.getElementById('contact-form');
+                if (contactForm) {
+                    contactForm.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        // Aquí se añadiría la lógica para enviar el formulario
+                        alert('¡Mensaje enviado con éxito! Nos pondremos en contacto con usted lo antes posible.');
+                        this.reset();
+                    });
+                }
+            });
+        </script>
 </body>
 
 </html>
