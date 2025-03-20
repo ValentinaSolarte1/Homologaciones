@@ -115,5 +115,5 @@ function simulateLogin(redirectUrl) {
 // Función para redirigir a la página de registro
 function redirectToRegister() {
     console.log("Redirigiendo a formulario de homologación...");
-    window.location.href = 'registro.html';
+    window.location.href = 'homoformulario.html';
 }
