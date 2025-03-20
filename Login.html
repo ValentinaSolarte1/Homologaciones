@@ -28,14 +28,14 @@
         </div>
 
         <div class="form-container">
-            <h2 class="form-title"> Homologaciones Uniautonoma</h2>
+            <h2 class="form-title">Homologaciones Uniautónoma</h2>
 
             <div id="error-message" class="error-message"></div>
 
             <form id="login-form">
                 <div class="input-group">
-                    <label>Correo Electrónico:</label>
-                    <input type="email" id="email" name="Correo" placeholder="Ingrese su correo"require><br>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="correo" placeholder="Ingrese su correo" required>
                     <span class="input-icon"></span>
                 </div>
 
@@ -50,11 +50,11 @@
                     <label for="remember">Recordar mis datos</label>
                 </div>
 
-                <button type="submit" class="login-btn">INGRESAR</button>
+                <button type="submit" id="login-btn" class="login-btn">INGRESAR</button>
             </form>
 
             <div class="help-links">
-                <a href="registro.html">Registrate Aqui</a>
+                <a href="registro.html">Registrate Aquí</a>
                 <a href="paginaprincipal.html">Contactar soporte</a>
             </div>
         </div>
@@ -63,6 +63,7 @@
             Universidad Autónoma del Cauca © 2025 - Sistema de Homologaciones
         </div>
     </div>
+
     <script src="login.js"></script>
 </body>
 
