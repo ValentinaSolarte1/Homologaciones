@@ -405,9 +405,7 @@ const pensum = {
         "Semestre 1": ["Fundamentos de Programación", "Lógica de Programación", "Matemáticas Aplicadas", "Introducción a las Bases de Datos"],
         "Semestre 2": ["Estructuras de Datos", "Desarrollo Web Básico", "Programación Orientada a Objetos", "Modelado de Bases de Datos"],
         "Semestre 3": ["Desarrollo de Aplicaciones Móviles", "Bases de Datos Avanzadas", "Ingeniería de Software", "Redes y Comunicaciones"],
-        "Semestre 4": ["Programación en la Nube", "Pruebas de Software", "Metodologías Ágiles", "Desarrollo Seguro de Aplicaciones"],
-        "Semestre 5": ["Inteligencia Artificial Básica", "Seguridad Informática", "Administración de Sistemas Operativos", "Análisis de Datos"],
-        "Semestre 6": ["Big Data", "Gestión de Proyectos de Software", "Emprendimiento en TIC", "Trabajo de Grado"]
+        "Semestre 4": ["Programación en la Nube", "Pruebas de Software", "Metodologías Ágiles", "Desarrollo Seguro de Aplicaciones"]
     },
 
     "Tecnología en Gestión de Redes de Datos": {
@@ -754,7 +752,7 @@ function redirigirAspirante() {
         // Eliminar el modal después de la transición
         setTimeout(() => {
             modal.remove();
-            window.location.href = "interfazAspirante.html";
+            window.location.href = "visualizacionhomo.html";
         }, 300);
     }
 }
