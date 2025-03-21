@@ -371,6 +371,52 @@
                     });
                 }
             });
+            document.addEventListener('DOMContentLoaded', function () {
+                // Seleccionar elementos del DOM
+                const menuToggle = document.createElement('button');
+                menuToggle.className = 'menu-toggle';
+                menuToggle.innerHTML = '☰';
+                menuToggle.setAttribute('aria-label', 'Abrir menú');
+
+                const headerContainer = document.querySelector('.header-container');
+                const navLinks = document.querySelector('.nav-links');
+
+                // Insertar el botón de menú en el encabezado
+                headerContainer.insertBefore(menuToggle, navLinks);
+
+                // Agregar evento click al botón de menú
+                menuToggle.addEventListener('click', function () {
+                    navLinks.classList.toggle('active');
+
+                    // Cambiar el ícono y el aria-label según el estado
+                    if (navLinks.classList.contains('active')) {
+                        menuToggle.innerHTML = '✕';
+                        menuToggle.setAttribute('aria-label', 'Cerrar menú');
+                    } else {
+                        menuToggle.innerHTML = '☰';
+                        menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    }
+                });
+
+                // Cerrar el menú al hacer clic en un enlace
+                const links = navLinks.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', function () {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '☰';
+                        menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    });
+                });
+
+                // Cerrar el menú al redimensionar la ventana a un tamaño más grande
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth > 480) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '☰';
+                        menuToggle.setAttribute('aria-label', 'Abrir menú');
+                    }
+                });
+            });
         </script>
 </body>
 
