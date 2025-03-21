@@ -569,6 +569,20 @@
                 <a href="#" id="ayudaLink"><i class="fas fa-question-circle"></i>Información</a>
             
         </div>
+        <div class="help-links">
+            <a href="#" id="ayudaLink">
+                <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+            </a>
+        </div>
+        
+        <script>
+            document.getElementById("ayudaLink").addEventListener("click", function(event) {
+                event.preventDefault(); // Evita que el enlace se comporte como uno normal
+                window.location.href = 'formularioHomologacion.html';
+              });
+        </script>
+
+        
         
         <div class="footer">
             © 2025 UNIAUTÓNOMA DEL CAUCA - Todos los derechos reservados
