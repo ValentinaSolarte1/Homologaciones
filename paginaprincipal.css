@@ -216,7 +216,6 @@ main {
     position: relative;
     padding-bottom: 15px;
 }
-
 .section-title::after {
     content: '';
     position: absolute;
@@ -562,68 +561,208 @@ footer {
     margin-top: 50px;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        padding: 10px 0;
-    }
-
-    .logo {
-        margin-bottom: 15px;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 10px;
-    }
-
-    .nav-links li {
-        margin: 5px 10px;
-    }
-
-    .banner {
-        padding: 60px 20px;
-    }
-
-    .banner h2 {
-        font-size: 1.8rem;
-    }
-
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-
-    section {
-        padding: 20px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner h2 {
-        font-size: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
-    }
-
-    .step {
-        padding: 20px 15px;
-    }
-
-    .form-section {
-        padding: 25px 20px;
-    }
-}
 
 /* Hidden class */
 .hidden {
     display: none;
+}
+/* Hidden class */
+.hidden {
+    display: none;
+}
+/* Media Queries para Responsividad */
+@media screen and (max-width: 1024px) {
+    section {
+        padding: 25px;
+    }
+    
+    .contact-container {
+        gap: 30px;
+    }
+    
+    .map-container {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .banner {
+        padding: 60px 15px;
+    }
+    
+    .process-steps {
+        gap: 20px;
+    }
+    
+    .form-section, #contacto {
+        padding: 30px 20px;
+    }
+    
+    .contact-form, .contact-info {
+        padding: 20px 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .logo img {
+        height: 40px;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+
+    
+    .banner {
+        padding: 40px 15px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+    }
+    
+    section {
+        padding: 20px 15px;
+        margin-bottom: 40px;
+    }
+    
+    .process-steps {
+        margin-top: 20px;
+    }
+    
+    .step {
+        padding: 20px 15px;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .map-container {
+        height: 250px;
+    }
+}
+/* Estilos para mejora de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .banner::before {
+        animation: none;
+    }
+    
+    .animate-fade-in {
+        opacity: 1;
+        transform: translateY(0);
+        animation: none;
+    }
+}
+@media (max-width: 768px) {
+    .nav-links {
+        display: block; /* Asegurar que el menú siempre sea visible */
+    }
+
+    .nav-links li {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .container {
+        width: 90%; /* Reducir el ancho para adaptarse mejor */
+        margin: auto;
+    }
+
+    .section {
+        padding: 20px;
+    }
+}
+/* Estilos generales para la barra de navegación */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+/* Estilos para el botón de menú */
+.menu-toggle {
+    display: none; /* Ocultar por defecto en pantallas grandes */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Mostrar el botón en pantallas pequeñas */
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    /* Ocultar los enlaces del menú hasta que se active */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        background-color: white;
+        width: 200px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    /* Mostrar el menú cuando esté activo */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
 }
