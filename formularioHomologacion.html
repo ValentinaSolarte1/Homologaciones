@@ -159,70 +159,92 @@
             <div class="step-content" id="step-2">
                 <h3>Universidad de Origen</h3>
 
-                <!-- Selección de País (Solo Colombia) -->
-                <label>País:</label>
-                <select id="pais" required disabled onchange="cargarPaises()">
-                    <option value="Colombia">Colombia</option>
-                </select><br>
+                <div class="row">
+                    <!-- Selección de País -->
+                    <div class="col-md-4 form-group">
+                        <label>País:</label>
+                        <select id="pais" class="form-control" required disabled onchange="cargarPaises()">
+                            <option value="Colombia">Colombia</option>
+                        </select>
+                    </div>
 
-                <!-- Selección de Departamento (Solo Cauca) -->
-                <label>Departamento:</label>
-                <select id="departamento" required disabled onchange="cargarCiudades()">
-                    <option value="Cauca">Cauca</option>
-                </select><br>
+                    <!-- Selección de Departamento -->
+                    <div class="col-md-4 form-group">
+                        <label>Departamento:</label>
+                        <select id="departamento" class="form-control" required disabled onchange="cargarCiudades()">
+                            <option value="Cauca">Cauca</option>
+                        </select>
+                    </div>
 
-                <!-- Selección de Ciudad (Solo Popayán) -->
-                <label>Ciudad:</label>
-                <select id="ciudad" required disabled onchange="cargarUniversidades()">
-                    <option value="Popayán">Popayán</option>
-                </select><br>
-
-                <!-- Institución de origen (se carga después de seleccionar la ciudad) -->
-                <label>Institución de origen:</label>
-                <select id="institucion" required onchange="updateFormacion()">
-                    <option value="">Seleccione</option>
-                    <option value="SENA">SENA</option>
-                    <option value="FUP">FUP</option>
-                    <option value="Colegio Mayor">Colegio Mayor</option>
-                </select><br>
-
-                <!-- Tipo de formación -->
-                <label>Tipo de formación:</label>
-                <select id="tipo_formacion" required onchange="updateCarreras()">
-                    <option value="">Seleccione</option>
-                </select><br>
-
-                <!-- Carrera / Programa -->
-                <label>Carrera / Programa:</label>
-                <select id="carrera" required>
-                    <option value="">Seleccione</option>
-                </select><br>
-
-                <!-- ¿Finalizó estudios? -->
-                <label>¿Finalizó sus estudios?</label>
-                <select id="finalizo_estudios" required onchange="toggleFechaFinalizacion()">
-                    <option value="">Seleccione</option>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                </select><br>
-
-                <!-- Fecha de Finalización -->
-                <div id="fecha_finalizacion_container" style="display: none;">
-                    <label>Fecha de Finalización de sus estudios:</label>
-                    <input type="date" id="fecha_finalizacion" required><br>
+                    <!-- Selección de Ciudad -->
+                    <div class="col-md-4 form-group">
+                        <label>Ciudad:</label>
+                        <select id="ciudad" class="form-control" required disabled onchange="cargarUniversidades()">
+                            <option value="Popayán">Popayán</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Fecha del Último Semestre Cursado -->
-                <div id="fecha_ultimo_semestre_container" style="display: none;">
-                    <label>Fecha del Último Semestre Cursado:</label>
-                    <input type="date" id="fecha_ultimo_semestre" required><br>
+                <div class="row">
+                    <!-- Institución de origen -->
+                    <div class="col-md-4 form-group">
+                        <label>Institución de origen:</label>
+                        <select id="institucion" class="form-control" required onchange="updateFormacion()">
+                            <option value="">Seleccione</option>
+                            <option value="SENA">SENA</option>
+                            <option value="FUP">FUP</option>
+                            <option value="Colegio Mayor">Colegio Mayor</option>
+                        </select>
+                    </div>
+
+                    <!-- Tipo de formación -->
+                    <div class="col-md-4 form-group">
+                        <label>Tipo de formación:</label>
+                        <select id="tipo_formacion" class="form-control" required onchange="updateCarreras()">
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+
+                    <!-- Carrera / Programa -->
+                    <div class="col-md-4 form-group">
+                        <label>Carrera / Programa:</label>
+                        <select id="carrera" class="form-control" required>
+                            <option value="">Seleccione</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- ¿Finalizó estudios? -->
+                    <div class="col-md-4 form-group">
+                        <label>¿Finalizó sus estudios?</label>
+                        <select id="finalizo_estudios" class="form-control" required
+                            onchange="toggleFechaFinalizacion()">
+                            <option value="">Seleccione</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Fecha de Finalización (Se muestra si selecciona "Sí") -->
+                    <div class="col-md-4 form-group" id="fecha_finalizacion_container" style="display: none;">
+                        <label>Fecha de Finalización:</label>
+                        <input type="date" id="fecha_finalizacion" class="form-control" required>
+                    </div>
+
+                    <!-- Fecha del Último Semestre Cursado (Se muestra si selecciona "No") -->
+                    <div class="col-md-4 form-group" id="fecha_ultimo_semestre_container" style="display: none;">
+                        <label>Fecha del Último Semestre Cursado:</label>
+                        <input type="date" id="fecha_ultimo_semestre" class="form-control" required>
+                    </div>
                 </div>
 
                 <div class="btn-container">
-                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="next-button" onclick="validarFormularioStep2()">Siguiente</button>
+                    <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
+                    <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
                 </div>
             </div>
+
             <!--STEP 3-->
 
             <div class="step-content" id="step-3">
