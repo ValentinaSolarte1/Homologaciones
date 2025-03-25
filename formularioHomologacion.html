@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+       
+       <!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -56,6 +58,7 @@
         <form id="homologacion-form">
             <div class="step-content active" id="step-1">
                 <form id="formulario">
+                    <h2>Informacion personal</h2>
 
                     <!-- Tipo de Identificación y Número -->
                     <div class="row">
@@ -157,7 +160,7 @@
             </div>
             <!--STEP # 2 DONDE CARGAR LAS UNIVERSIDADES QUE HAY EN EL PAIS-->
             <div class="step-content" id="step-2">
-                <h3>Universidad de Origen</h3>
+                <h2>Instituto de educaion superior de origen </h2>
 
                 <div class="row">
                     <!-- Selección de País -->
@@ -241,12 +244,11 @@
 
                 <div class="btn-container">
                     <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
-                    <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
+                    <button class="next-button" onclick="validarFormularioStep2(1, event)">Siguiente</button>
                 </div>
             </div>
 
             <!--STEP 3-->
-
             <div class="step-content" id="step-3">
                 <h2>Registro de Notas</h2>
 
@@ -264,51 +266,75 @@
                     </select>
                 </div>
 
-                <button class="add-button" onclick="agregarMateria()"><i class="fa-solid fa-plus"></i> Agregar
-                    Materia</button>
+                <button class="add-button" onclick="agregarMateria()">
+                    <i class="fa-solid fa-plus"></i> Agregar Materia
+                </button>
 
                 <h3>Materias Seleccionadas</h3>
                 <div id="materias-container"></div>
-                <div class="btn-container">
 
-                    <button class="prev-button" onclick="changeStep(-1, event)">Anterior</button>
-                    <button class="next-button" onclick="changeStep(1, event)">Siguiente</button>
+                <div class="mensaje-info">
+                    <i class="fa-solid fa-info-circle"></i> Debe registrar al menos 6 materias con notas para continuar
+                    con la homologación.
+                </div>
+
+                <div class="btn-container">
+                    <button class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                    <button class="next-button" onclick="validacionStep3();">Siguiente</button>
                 </div>
             </div>
-
 
 
             <div class="step-content" id="step-4">
                 <h2>Documentos</h2>
 
-                <label>Documento de Identidad:</label>
-                <input type="file" id="documento_id" accept=".pdf" required><br>
+                <div>
+                    <label>Documento de Identidad:</label>
+                    <input type="file" id="documento_id" accept=".pdf" required>
+                    <span class="error-message"></span>
+                </div>
 
-                <label>Certificado de Notas:</label>
-                <input type="file" id="certificado_notas" accept=".pdf" required><br>
+                <div>
+                    <label>Certificado de Notas:</label>
+                    <input type="file" id="certificado_notas" accept=".pdf" required>
+                    <span class="error-message"></span>
+                </div>
 
-                <label>Contenido Programático:</label>
-                <input type="file" id="contenido_programatico" accept=".pdf" required><br>
+                <div>
+                    <label>Contenido Programático:</label>
+                    <input type="file" id="contenido_programatico" accept=".pdf" required>
+                    <span class="error-message"></span>
+                </div>
 
-                <label>Carta Solicitud de Homologación:</label>
-                <input type="file" id="carta_homologacion" accept=".pdf" required><br>
+                <div>
+                    <label>Carta Solicitud de Homologación:</label>
+                    <input type="file" id="carta_homologacion" accept=".pdf" required>
+                    <span class="error-message"></span>
+                </div>
 
-                <label>Certificación de Finalización de Estudios (Opcional):</label>
-                <input type="file" id="certificacion_finalizacion" accept=".pdf"><br>
+                <div>
+                    <label>Certificación de Finalización de Estudios:</label>
+                    <input type="file" id="certificacion_finalizacion" accept=".pdf">
+                    <span class="error-message"></span>
+                </div>
 
-                <!-- Documentos adicionales para extranjeros (se mostrarán si aplica) -->
+                <!-- Documentos adicionales para extranjeros -->
                 <div id="extra-docs" class="hidden">
                     <h3>Documentos adicionales para extranjeros</h3>
 
-                    <label>Copia de la Visa o Pasaporte:</label>
-                    <input type="file" id="visa_pasaporte" accept=".pdf"><br>
-                </div>
-                <div class="btn-container">
-                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
-                    <button type="button" class="next-button" onclick="changeStep(1)">Siguiente</button>
+                    <div>
+                        <label>Copia de la Visa o Pasaporte:</label>
+                        <input type="file" id="visa_pasaporte" accept=".pdf">
+                        <span class="error-message"></span>
+                    </div>
                 </div>
 
+                <div class="btn-container">
+                    <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
+                    <button type="button" class="next-button" onclick="validarFormularioStep4()">Siguiente</button>
+                </div>
             </div>
+
 
 
             <div class="step-content" id="step-5">
@@ -318,12 +344,13 @@
                 <div class="btn-container">
 
                     <button type="button" class="prev-button" onclick="changeStep(-1)">Anterior</button>
-                    <button type="submit" class="submit-button" onclick="confirmarDatos()">Enviar</button>
+                    <button type="button" class="submit-button" onclick="confirmarDatos()">Enviar</button>
                 </div>
             </div>
         </form>
     </div>
     <script src="JavaFormularioHomologacion.js"></script>
+    
 </body>
 
 </html>
