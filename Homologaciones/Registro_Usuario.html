@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homologaciones UNIAUTÓNOMA DEL CAUCA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="estilo_Registro_Usuario.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <!-- Burbujas animadas de fondo -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Botón de inicio -->
+    <a href="index.html" class="btn btn-primary home-btn">
+        <i class="fas fa-home"></i> Inicio
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="quimerito.png" alt="Logo" />
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h2 class="form-title">Homologaciones Uniautonoma</h2>
+
+            <!-- Mensaje de error (oculto por defecto) -->
+            <div id="errorMessage" class="error-message">
+                <i class="fas fa-exclamation-circle"></i> Verifica los datos ingresados e intenta nuevamente.
+            </div>
+
+            <form id="registroForm">
+                <div class="input-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" placeholder="Ingrese su correo" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmEmail">Confirmación de correo:</label>
+                    <input type="email" id="confirmEmail" placeholder="Confirme su correo" required>
+                    <i class="fas fa-envelope-open input-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label for="tipoDocumento">Tipo de documento:</label>
+                    <select id="tipoDocumento" required>
+                        <option value="" selected disabled>Seleccione un tipo de documento</option>
+                        <option value="TI">Tarjeta de Identidad (TI)</option>
+                        <option value="CC">Cédula de Ciudadanía (CC)</option>
+                        <option value="CE">Cédula de Extranjería</option>
+                    </select>
+                    <i class="fas fa-id-card input-icon"></i>
+                </div>
+
+                <div class="input-group">
+                    <label for="numeroDocumento">Número de documento:</label>
+                    <input type="text" id="numeroDocumento" name="numeroDocumento"
+                        placeholder="Ingrese su número de documento" pattern="[0-9]{5,}"
+                        title="Solo números, mínimo 5 dígitos" inputmode="numeric" required>
+                    <i class="fas fa-hashtag input-icon"></i>
+                </div>
+
+                <!-- reCAPTCHA -->
+                <div class="recaptcha-container mb-3">
+                    <div class="g-recaptcha" data-sitekey="6Lcqj-cqAAAAAEwiItxDZJqnze8re8ej45zYdM_z"></div>
+                </div>
+
+                <button type="submit" class="registro-btn">
+                    <i class="fas fa-user-plus"></i> Guardar solicitud
+                </button>
+            </form>
+
+            <div class="help-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Información</a>
+            </div>
+
+            <div class="help-links">
+                <a href="#"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+            </div>
+        </div> <!-- Cierre de .form-container -->
+
+        <div class="footer">
+            © 2025 UNIAUTÓNOMA DEL CAUCA - Todos los derechos reservados
+        </div>
+    </div> <!-- Cierre de .container -->
+
+    <!-- Scripts al final del body -->
+    <script src="Registro_usuario.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
